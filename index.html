@@ -37,8 +37,17 @@
 						<div class="g_block_top"><span class="g_block_top_l"></span><span class="g_block_top_r"></span></div>
 						<div class="g_middle">	
 							
-							<!-- rotator component -->
-							<div class="g_block_content g_rotator g_rotator_c8 g_rotator_t3">
+							<!-- 
+								Rotator component 
+								Mandatory attributes
+								- id, used for initializing the javascript
+								- class
+									- g_block_content	
+									- g_rotator 		This is a rotator component
+									- g_rotator_c8 		with 8 columns
+									- g_rotator_t3		width 3 slides
+							-->
+							<div id="e13571" class="g_block_content g_rotator g_rotator_c8 g_rotator_t3">
 								
 								<!-- start first tab content -->	
 								<div id="e13571rotator-1" class="g_rotator_item">
@@ -50,20 +59,6 @@
 											<h3><a href="http://shop.tdc.dk%2FDesire%2520S%2F341411%2Cdefault%2Cpd.html">HTC Incredible S</a></h3>
 										</div>
 									</div>									
-									<script type="text/javascript">
-										var flashdata_13571tab1 = {
-											src: "http://aida.tdc.dk/5/7/1/4175/org.swf?link_1=shop.tdc.dk%2FIncredible%2520S%2520Sort%2F341049%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_fane1_Imedia_incredibles&amp;callmeId=13359",
-											width : "974",
-											height: "372",
-											flashVars : {
-												"sc_movie_id" : "movie_13571tab1"
-											},
-											contentId : "e13571tab1"
-										};
-										tdc.Grd.Event.Pool.bind({
-											init: tdc.Grd.Flash.embed(flashdata_13571tab1)
-										});
-									</script>
 								</div>
 								<!-- end first tab content -->	
 
@@ -77,20 +72,6 @@
 											<h3><a href="http://shop.tdc.dk/Xperia™%20Arc%20S&oslash;lv/341229,default,pd.html">Arc - Med indbygget TDC PlayWall</a></h3>
 										</div>
 									</div>
-									<script type="text/javascript">
-										var flashdata_13571tab2 = {
-											src: "http://aida.tdc.dk/6/7/1/4176/org.swf?link_1=shop.tdc.dk%2FXperia%E2%84%A2%2520Arc%2520S%C3%B8lv%2F341229%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_fane2_imedia_arc&amp;callmeId=13359",
-											width : "974",
-											height: "372",
-											flashVars : {
-												"sc_movie_id" : "movie_13571tab2"
-											},
-											contentId : "e13571tab2"
-										};
-										tdc.Grd.Event.Pool.bind({
-											init: tdc.Grd.Flash.embed(flashdata_13571tab2)
-										});
-									</script>
 								</div>
 								<!-- end second tab content -->
 								
@@ -105,21 +86,9 @@
 									</div>
 									<script type="text/javascript">
 
-										var flashdata_13571tab3 = {
-											src: "http://aida.tdc.dk/5/5/1/4155/org.swf?link_1=esalg.tdc.dk%2FN8%2Fsb_340378%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_nokia_n8_fane3&amp;callmeId=13232",
-											width : "974",
-											height: "372",
-											flashVars : {
-												"sc_movie_id" : "movie_13571tab3"
-											},
-											contentId : "e13571tab3"
-										};
-										tdc.Grd.Event.Pool.bind({
-											init: tdc.Grd.Flash.embed(flashdata_13571tab3)
-										});
 									</script>
 								</div>
-								<!-- end second tab content -->
+								<!-- end third tab content -->
 								
 								<!-- navigation for tabs -->
 								<ul class="g_rotator_controls">
@@ -132,6 +101,38 @@
 						</div>
 						<div class="g_block_bot"><span class="g_block_bot_l"></span><span class="g_block_bot_r"></span></div>
 					</div>
+					<script type="text/javascript">
+						// initialize the first rotator
+						$(document).ready(function(){
+							var flashData = [
+								// Flash data for first item
+								{
+									src: "http://aida.tdc.dk/5/7/1/4175/org.swf?link_1=shop.tdc.dk%2FIncredible%2520S%2520Sort%2F341049%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_fane1_Imedia_incredibles&amp;callmeId=13359",
+									flashVars : {
+										"sc_movie_id" : "movie_13571tab1"
+									},
+									contentId : "e13571tab1"
+								}, 
+								
+								// You can pass non-Objects for slides that have no Flash
+								null,
+								
+								{
+									src: "http://aida.tdc.dk/5/5/1/4155/org.swf?link_1=esalg.tdc.dk%2FN8%2Fsb_340378%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_nokia_n8_fane3&amp;callmeId=13232",
+									flashVars : {
+										"sc_movie_id" : "movie_13571tab3"
+									},
+									contentId : "e13571tab3"
+								}
+							];
+							
+							var id = 'e13571';
+							var numberOfColumns = 8;
+							var rotator = new tdc.ui.Rotator( id, numberOfColumns, flashData, {
+								rotateTime : 6000 
+							});
+						});
+					</script>
 
 					<div class="g_block g_block_c12">
 						<div class="g_block_top"><span class="g_block_top_l"></span><span class="g_block_top_r"></span></div>
@@ -177,13 +178,9 @@
 						</div>
 						<div class="g_block_bot"><span class="g_block_bot_l"></span><span class="g_block_bot_r"></span></div>
 					</div>
-					
 					<script type="text/javascript">
-					</script>
-					
-					<script type="text/javascript">
+						// initialize the first second rotator
 						$(document).ready(function(){
-							
 							var flashData = [
 								{
 									src: "http://aida.tdc.dk/5/7/1/4175/org.swf?link_1=shop.tdc.dk%2FIncredible%2520S%2520Sort%2F341049%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_fane1_Imedia_incredibles&amp;callmeId=13359",
@@ -199,7 +196,6 @@
 									contentId : "e13571-clonetab2"
 								}
 							];
-							
 							
 							var id = 'e13571-clone';
 							var numberOfColumns = 12;

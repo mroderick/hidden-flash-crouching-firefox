@@ -4,18 +4,10 @@
 var tdc = tdc || {};
 tdc.ui = tdc.ui || {};
 
-
-/**
- *	Rotator can display content in tabs
- *	@param
- *
- *
- *	@constructor
- */
 tdc.ui.Rotator = (function($){
 	
 	"use strict";
-	// default time between slides
+
 	var DEFAULT_ROTATE_TIME = 6000;
 	var FLASH_WIDTH_12_COLUMNS = 972;
 	var FLASH_WIDTH_8_COLUMNS = 646;
@@ -29,6 +21,16 @@ tdc.ui.Rotator = (function($){
 		var isOnWindows = navigator.userAgent.toLowerCase().indexOf("windows") !== -1;
 		return isFlashBuggyFirefox4Zero && isOnWindows;
 	}());
+	
+	/** 
+	 *	Determines if a value is an Object, works across frames
+	 *	@param		{ Any }		value A value to examine
+	 *	@returns	{ Boolean }
+	 *	@private
+	 */
+	var isObject = function(value){
+		return Object.prototype.toString.call(value) === '[object Object]';
+	};
 	
 	/**
 	 *	Starts all the flash elements on the page with the data provided
@@ -55,17 +57,92 @@ tdc.ui.Rotator = (function($){
 		for ( var i = 0, j = flashData.length; i < j; i++ ){
 		
 			data = flashData[i];
+			
+			// if data is an object, then we're expected to insert flash
+			if ( isObject( data ) ){
+				// set the correct dimensions
+				data.width = width;
+				data.height = height;
 		
-			// set the correct dimensions
-			data.width = width;
-			data.height = height;
-		
-			tdc.Grd.Event.Pool.bind({
-				init: tdc.Grd.Flash.embed( data )
-			});
+				tdc.Grd.Event.Pool.bind({
+					init: tdc.Grd.Flash.embed( data )
+				});
+			}
 		}
 	};
 		
+	/**
+	 *	Rotator can display content in tabs, and can embed Flash files, if parameters for the Flash files are provided to 
+	 *	the constructor.
+	 *	Currently jQuery UI is used for displaying content in tabs.
+	 *	
+		<code>
+			<!-- HTML for non-JavaScript and non-Flash browsers -->
+			<div id="e13571" class="g_block_content g_rotator g_rotator_c8 g_rotator_t2">
+				<!-- start first tab content -->	
+				<div id="e13571rotator-1" class="g_rotator_item">
+					<div id="e13571tab1">
+						<a onclick="tdc.redir(this.href, '__p_forside_forside_fane1_Imedia_incredi');return false;" href="http://shop.tdc.dk%2FDesire%2520S%2F341411%2Cdefault%2Cpd.html">
+							<img src="http://i0.c.dk/pics/0/4/1/69140/org.jpg" alt="HTC Incredible S">
+						</a>
+						<div class="g_block_txt g_accessibility">
+							<h3><a href="http://shop.tdc.dk%2FDesire%2520S%2F341411%2Cdefault%2Cpd.html">HTC Incredible S</a></h3>
+						</div>
+					</div>									
+				</div>
+				<!-- end first tab content -->	
+
+				<!-- start second tab content -->
+				<div id="e13571rotator-2" class="g_rotator_item">
+					<div id="e13571tab2">
+						<a onclick="tdc.redir(this.href, '__p_forside_forside_fane2_imedia_arc');return false;" href="http://shop.tdc.dk/Xperia™%20Arc%20S&amp;oslash;lv/341229,default,pd.html">
+							<img src="http://i4.c.dk/pics/4/3/1/69134/org.jpg" alt="Arc - Med indbygget TDC PlayWall">
+						</a>
+						<div class="g_block_txt g_accessibility">
+							<h3><a href="http://shop.tdc.dk/Xperia™%20Arc%20S&oslash;lv/341229,default,pd.html">Arc - Med indbygget TDC PlayWall</a></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<script type="text/javascript">
+				// initialize the rotator
+				$(document).ready(function(){
+					var flashData = [
+						// Flash data for first item
+						{
+							src: "http://aida.tdc.dk/5/7/1/4175/org.swf?link_1=shop.tdc.dk%2FIncredible%2520S%2520Sort%2F341049%2Cdefault%2Cpd.html%26csref%3D__p_forside_forside_fane1_Imedia_incredibles&amp;callmeId=13359",
+							flashVars : {
+								"sc_movie_id" : "movie_13571tab1"
+							},
+							contentId : "e13571tab1"
+						}, 
+						
+						// You can pass non-Objects for slides that have no Flash
+						null
+					];
+					
+					var id = 'e13571';
+					var numberOfColumns = 8;
+					var rotator = new tdc.ui.Rotator( id, numberOfColumns, flashData, {
+						rotateTime : 6000 
+					});
+				});
+			</script>
+			
+	 *	</code>
+	 *
+	 *
+	 *	@param { String }	id					The id of the containing element
+	 *	@param { Number }	numberOfColumns		The number of columns (from Grid design) to render the output with,
+												currently only 8 and 12 columns are supported
+	 *	@param { Array }	flashData			An array of Objects to initialize Flash for each slide
+	 *	@param { Object }	options				Optional parameters:
+	 *											- { Number }	rotateTime	Number of milliseconds to wait between each slide
+	 *
+	 *	@throws { Error }	If the parameters are invalid
+	 *	@constructor
+	 */
 	return function konstructor( id, numberOfColumns, flashData, options ){
 		// throw error if the constructor is being called without using "new" keyword
 		if (!(this instanceof konstructor)){
@@ -82,7 +159,8 @@ tdc.ui.Rotator = (function($){
 		var rotateTime = options && parseInt( options.rotateTime, 10 ) || DEFAULT_ROTATE_TIME,
 			tabsSelector = '#' + id + '.g_rotator';
 		
-		$(tabsSelector).tabs().tabs("rotate", rotateTime , false);
+		// initialize jQuery UI tabs, and tell them to autorotate with the rotateTime
+		$(tabsSelector).tabs().tabs("rotate", rotateTime);
 	};
 	
 }(jQuery));
