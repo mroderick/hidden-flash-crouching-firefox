@@ -44,9 +44,9 @@ tdc.ui.Rotator = (function($){
 	 *
 	 */
 	var startFlash = function( numberOfColumns, flashData ){
-		if ( bugfix_shouldUseFallbackInsteadOfFlash ){
-			return false;
-		}
+		// if ( bugfix_shouldUseFallbackInsteadOfFlash ){
+		//	return false;
+		// }
 
 		// select the correct dimensions for the flash object
 		var width = numberOfColumns === 12 ? FLASH_WIDTH_12_COLUMNS : FLASH_WIDTH_8_COLUMNS,
