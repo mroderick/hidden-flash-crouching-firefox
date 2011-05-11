@@ -1,3 +1,4 @@
+
 /** 
  file: rotator.css
  
@@ -25,7 +26,7 @@
 
     .g_rotator ul.g_rotator_controls {
     	height: 25px;
-    	background: transparent url("http://i.c.dk/gfx/grd/common/sprite_hr.png") no-repeat;
+    	background: transparent;
     	padding: 0;
     	border: 0;
     	white-space: nowrap;
