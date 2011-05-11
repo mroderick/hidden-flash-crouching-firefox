@@ -2,6 +2,8 @@
 
 This is (somewhat) reduced testcase for a Firefox4/Win bug, where Flash is sometimes invisible until a mouseover event fires
 
+The bug has been reported in BugZilla <https://bugzilla.mozilla.org/show_bug.cgi?id=656276>
+
 In order to make it easy to reproduce, the content of this repository is being served up at <http://roderick.dk/experiments/hidden-flash-crouching-firefox/>
 
 ## Steps to reproduce
